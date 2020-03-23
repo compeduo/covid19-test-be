@@ -4,22 +4,27 @@ $form = new Form();
 
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 if ($requestMethod != "POST") {
-    // pokud neni post
     http_response_code(400);
+    die("Not a POST method");
 }
 
-$content = file_get_contents('php://input');
-// WTF?
+// Takes raw data from the request
+$content = file_get_contents("php://input"); // Read body
+// Converts it into a PHP object
 if ($content == null) {
-    echo "Content je null!";
+    die("Content je null!");
 }
 
 $data = (array)json_decode($content, TRUE);
 if ($data == null) {
     http_response_code(400);
+    die("Data are null!");
 }
 
-if ($form->save($data['phone'], $data['fever'], $data['long_fever'], $data['breathing'], $data['cough'], $data['old'])) {
+echo "Processing:\n";
+print_r($content);
+
+if ($form->save($data['phone'], $data['fever'], $data['longFever'], $data['breathing'], $data['cough'], $data['old'])) {
     // pokud dojde k ulozeni
     http_response_code(200);
 } else {
