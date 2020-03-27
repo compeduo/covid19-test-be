@@ -2,7 +2,7 @@
 include "./functions.php";
 $form = new Form();
 
-header("Access-Control-Allow-Origin: https://covid19-test.now.sh");
+header("Access-Control-Allow-Origin: https://covid19-tester.cz");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 
